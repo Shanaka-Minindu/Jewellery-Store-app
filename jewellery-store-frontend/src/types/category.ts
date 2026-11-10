@@ -11,3 +11,8 @@ export interface CategoryResDto {
   gender: Gender;
   productCount: number;
 }
+
+export interface BasicRes{
+    id:number,
+    message:string
+}

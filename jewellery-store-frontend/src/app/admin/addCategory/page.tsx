@@ -18,8 +18,8 @@ export default function CategoryPage() {
   const fetchCategories = async () => {
     try {
       setIsFetching(true);
-      const response = await apiClient.get<CategoryResDto[]>('/categories');
-      setCategories(response.data);
+      const response = await categoryService.fetchCategories();
+      setCategories(response);
     } catch (error) {
       console.error('Failed to fetch categories:', error);
       toast.error('Failed to load categories.');
@@ -60,8 +60,8 @@ export default function CategoryPage() {
   const handleDeleteCategory = async (id: number) => {
     const toastId = toast.loading('Deleting category...');
     try {
-      const response = await apiClient.delete(`/category/${id}`);
-      toast.success(response.data.message || 'Category deleted successfully', {
+      const data = await categoryService.deleteCategory(id);
+      toast.success(data.message || 'Category deleted successfully', {
         id: toastId,
       });
       // Update state by removing deleted category item
