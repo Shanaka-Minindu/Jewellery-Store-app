@@ -46,6 +46,9 @@ public class Product {
     @Column(nullable = false)
     private boolean isNewArrival;
 
+    @Column(nullable = false)
+    private boolean hidePrice;
+
     @Column(precision = 5, scale = 2)
     private BigDecimal discount;
 

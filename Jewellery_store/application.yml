@@ -1,0 +1,11 @@
+aws:
+  s3:
+    region: us-east-1 # Change to your AWS region
+    bucket-name: jewellery-store-image
+    access-key: ${AWS_ACCESS_KEY_ID}
+    secret-key: ${AWS_SECRET_ACCESS_KEY}
+
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}

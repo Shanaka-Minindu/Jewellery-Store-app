@@ -16,3 +16,4 @@ export interface BasicRes{
     id:number,
     message:string
 }
+
