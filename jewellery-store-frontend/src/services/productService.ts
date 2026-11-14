@@ -1,5 +1,6 @@
 import apiClient from '@/lib/axios';
-import { ProductReqDto } from '@/types/product';
+import { AllProductResDto, AllProductsReqWithFiltersDto, DetailedProductView, ProductReqDto } from '@/types/product';
+import { UpdateProductReqDto } from '@/types/updateProduct';
 
 
 
@@ -33,5 +34,26 @@ export const productService = {
     console.log(data)
     const response = await apiClient.post('/product', data);
     return response.data;
+  },
+
+  // Add this inside your existing productService object:
+getAllProducts: async (filters: AllProductsReqWithFiltersDto): Promise<AllProductResDto[]> => {
+    // If your Spring Controller strictly expects POST instead of GET with body, change apiClient.get to apiClient.post
+    const response = await apiClient.post<AllProductResDto[]>('/products', filters);
+    return response.data;
+  },
+
+  getDetailedProductById: async (productId: string): Promise<DetailedProductView> => {
+    const response = await apiClient.get<DetailedProductView>(`/products/${productId}`);
+    return response.data;
+  },
+
+  updateProduct: async (productId: number, payload: UpdateProductReqDto): Promise<DetailedProductView> => {
+    const response = await apiClient.put<DetailedProductView>(`/products/${productId}`, payload);
+    return response.data;
+  },
+
+  deleteProduct: async (productId:number):Promise<void>=>{
+    await apiClient.delete<void>(`/products/${productId}`);
   },
 };

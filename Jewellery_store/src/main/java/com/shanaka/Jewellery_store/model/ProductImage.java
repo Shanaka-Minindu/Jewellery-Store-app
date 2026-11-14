@@ -1,5 +1,6 @@
 package com.shanaka.Jewellery_store.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,14 +20,11 @@ public class ProductImage {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column(nullable = false)
-    private boolean isPrimary; // True = main image for product cards
+    @Column(nullable = false, name = "is_primary")
+    private boolean isPrimary; // True = primary image for this variant's card/gallery
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_color_id", nullable = false)
-    private ProductColor productColor; // Links image to a specific color option
+    @JoinColumn(name = "product_variant_id", nullable = false)
+    @JsonBackReference
+    private ProductVariant productVariant; // Links image directly to a specific product variant option
 }

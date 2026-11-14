@@ -1,13 +1,13 @@
 package com.shanaka.Jewellery_store.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-@Table(name = "product_colors")
+@Table(name = "product_colors", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"colorName"})
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,28 +19,11 @@ public class ProductColor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String colorName; // e.g., "Yellow Gold", "Rose Gold", "Platinum"
+    @Column(nullable = false, length = 50, unique = true)
+    @NotNull(message = "Color name is required")
+    private String colorName; // e.g., "Red", "Black", "Yellow Gold"
 
     @Column(length = 50)
-    private String colorCode; // Optional hex code for UI swatches, e.g., "#FFD700"
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "productColor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<ProductImage> images = new ArrayList<>();
-
-    // Helper methods for color-specific images
-    public void addImage(ProductImage image) {
-        images.add(image);
-        image.setProductColor(this);
-    }
-
-    public void removeImage(ProductImage image) {
-        images.remove(image);
-        image.setProductColor(null);
-    }
+    @NotNull(message = "Color code is required")
+    private String colorCode; // e.g., "#ff0000", "#000000"
 }
