@@ -3,6 +3,7 @@ package com.shanaka.Jewellery_store.service;
 import com.shanaka.Jewellery_store.dto.CategoryReqDto;
 import com.shanaka.Jewellery_store.dto.CategoryResDto;
 import com.shanaka.Jewellery_store.model.Category;
+import com.shanaka.Jewellery_store.model.Gender;
 import com.shanaka.Jewellery_store.repo.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CategoryService {
@@ -40,4 +42,8 @@ public class CategoryService {
     public void deleteCategory(Long id){
        categoryRepo.deleteById(id);
     }
+
+
+
+
 }
