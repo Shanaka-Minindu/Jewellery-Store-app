@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { CartDrawer } from "@/components/CartDrawer";
@@ -21,10 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body className={`${inter.className} bg-background text-foreground antialiased`}>
-        <CartDrawer/>
+        <CartDrawer />
         <NavDrawer />
-      <Toaster position="top-right" richColors />
-      <Header/>
+        <Toaster position="top-right" richColors />
+        
+        {/* Wrap Header in Suspense to satisfy client-side hooks like usePathname during prerender */}
+        <Suspense fallback={<div className="h-20 bg-transparent" />}>
+          <Header />
+        </Suspense>
+
         {children}
       </body>
     </html>

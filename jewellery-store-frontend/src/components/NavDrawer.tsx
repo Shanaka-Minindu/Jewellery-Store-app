@@ -101,7 +101,7 @@ export const NavDrawer: React.FC = () => {
               </div>
 
               {/* Navigation Links List */}
-              <div className="px-6 py-4 space-y-1 tracking-wide">
+              <div className="px-6 py-4 space-y-1 text-sm tracking-wide text-gray-900">
                 {/* Home */}
                 <div className="border-b border-gray-200 py-4">
                   <Link
@@ -110,9 +110,10 @@ export const NavDrawer: React.FC = () => {
                       clearGender();
                       closeNavModal();
                     }}
-                    className="block text-sm text-gray-900 hover:opacity-60 transition-opacity"
+                    className="group/item inline-block relative py-1"
                   >
-                    HOME
+                    <span className="transition-opacity group-hover/item:opacity-75">HOME</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover/item:w-full" />
                   </Link>
                 </div>
 
@@ -120,13 +121,13 @@ export const NavDrawer: React.FC = () => {
                 <div className="border-b border-gray-200 py-4">
                   <button
                     onClick={handleToggleMen}
-                    className="w-full flex items-center justify-between hover:opacity-60 transition-opacity text-left"
+                    className="w-full flex items-center justify-between text-left group/btn cursor-pointer"
                   >
                     <span
                       className={`transition-all duration-200 ${
                         isMenOpen
-                          ? 'text-xs text-gray-400 font-normal uppercase tracking-wider'
-                          : 'text-sm text-gray-900 font-normal'
+                          ? 'text-xs text-gray-400 font-normal tracking-wider'
+                          : 'text-sm text-gray-900 font-medium tracking-wide'
                       }`}
                     >
                       MENS
@@ -134,7 +135,7 @@ export const NavDrawer: React.FC = () => {
                     {isMenOpen ? (
                       <Minus className="w-4 h-4 stroke-[1.5] text-gray-400" />
                     ) : (
-                      <Plus className="w-4 h-4 stroke-[1.5]" />
+                      <Plus className="w-4 h-4 stroke-[1.5] text-gray-900" />
                     )}
                   </button>
 
@@ -145,7 +146,7 @@ export const NavDrawer: React.FC = () => {
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="overflow-hidden flex flex-col space-y-3 pt-3 pl-2"
+                        className="overflow-hidden flex flex-col space-y-3 pt-4 pl-2"
                       >
                         {isLoading ? (
                           <p className="text-xs text-gray-400 py-1">Loading categories...</p>
@@ -153,11 +154,14 @@ export const NavDrawer: React.FC = () => {
                           menCategories.map((cat) => (
                             <Link
                               key={cat.id}
-                              href={`/store/men?category=${cat.id}`}
+                              href={`/store/MEN?category=${cat.id}`}
                               onClick={closeNavModal}
-                              className="text-gray-900 font-medium text-base hover:opacity-60 py-1 transition-colors"
+                              className="group/subitem inline-block w-fit relative text-[15px] font-medium text-gray-950 py-1 transition-colors"
                             >
-                              {cat.title}
+                              <span className="transition-opacity group-hover/subitem:opacity-70">
+                                {cat.title}
+                              </span>
+                              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover/subitem:w-full" />
                             </Link>
                           ))
                         )}
@@ -170,13 +174,13 @@ export const NavDrawer: React.FC = () => {
                 <div className="border-b border-gray-200 py-4">
                   <button
                     onClick={handleToggleWomen}
-                    className="w-full flex items-center justify-between hover:opacity-60 transition-opacity text-left"
+                    className="w-full flex items-center justify-between text-left group/btn cursor-pointer"
                   >
                     <span
                       className={`transition-all duration-200 ${
                         isWomenOpen
-                          ? 'text-xs text-gray-400 font-normal uppercase tracking-wider'
-                          : 'text-sm text-gray-900 font-normal'
+                          ? 'text-xs text-gray-400 font-normal tracking-wider'
+                          : 'text-sm text-gray-900 font-medium tracking-wide'
                       }`}
                     >
                       WOMENS
@@ -184,7 +188,7 @@ export const NavDrawer: React.FC = () => {
                     {isWomenOpen ? (
                       <Minus className="w-4 h-4 stroke-[1.5] text-gray-400" />
                     ) : (
-                      <Plus className="w-4 h-4 stroke-[1.5]" />
+                      <Plus className="w-4 h-4 stroke-[1.5] text-gray-900" />
                     )}
                   </button>
 
@@ -195,7 +199,7 @@ export const NavDrawer: React.FC = () => {
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="overflow-hidden flex flex-col space-y-3 pt-3 pl-2"
+                        className="overflow-hidden flex flex-col space-y-3 pt-4 pl-2"
                       >
                         {isLoading ? (
                           <p className="text-xs text-gray-400 py-1">Loading categories...</p>
@@ -203,11 +207,14 @@ export const NavDrawer: React.FC = () => {
                           womenCategories.map((cat) => (
                             <Link
                               key={cat.id}
-                              href={`/store/women?category=${cat.id}`}
+                              href={`/store/WOMEN?category=${cat.id}`}
                               onClick={closeNavModal}
-                              className="text-gray-900 font-medium text-base hover:opacity-60 py-1 transition-colors"
+                              className="group/subitem inline-block w-fit relative text-[15px] font-medium text-gray-950 py-1 transition-colors"
                             >
-                              {cat.title}
+                              <span className="transition-opacity group-hover/subitem:opacity-70">
+                                {cat.title}
+                              </span>
+                              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover/subitem:w-full" />
                             </Link>
                           ))
                         )}
@@ -221,9 +228,10 @@ export const NavDrawer: React.FC = () => {
                   <Link
                     href="/store/latest"
                     onClick={closeNavModal}
-                    className="block text-sm text-gray-900 hover:opacity-60 transition-opacity"
+                    className="group/item inline-block relative py-1"
                   >
-                    LATEST DROP
+                    <span className="transition-opacity group-hover/item:opacity-75">LATEST DROP</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover/item:w-full" />
                   </Link>
                 </div>
 
@@ -232,9 +240,10 @@ export const NavDrawer: React.FC = () => {
                   <Link
                     href="/store/sale"
                     onClick={closeNavModal}
-                    className="block text-sm text-gray-900 hover:opacity-60 transition-opacity"
+                    className="group/item inline-block relative py-1"
                   >
-                    FLASH SALE
+                    <span className="transition-opacity group-hover/item:opacity-75">FLASH SALE</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover/item:w-full" />
                   </Link>
                 </div>
               </div>
@@ -245,10 +254,13 @@ export const NavDrawer: React.FC = () => {
               <Link
                 href="/account/login"
                 onClick={closeNavModal}
-                className="flex items-center gap-3 text-sm tracking-wide text-gray-900 hover:opacity-60 transition-opacity"
+                className="group/login inline-flex items-center gap-3 text-sm tracking-wide text-gray-900 relative"
               >
                 <User className="w-5 h-5 stroke-[1.5]" />
-                <span>Log in</span>
+                <span className="relative">
+                  Log in
+                  <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover/login:w-full" />
+                </span>
               </Link>
             </div>
           </motion.div>

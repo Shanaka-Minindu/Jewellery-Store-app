@@ -97,11 +97,12 @@ public class ProductService {
         // 4. Save to PostgreSQL database (Cascade ALL will persist variants and images automatically)
         return productRepo.save(product);
     }
-
+    @Transactional(readOnly = true)
     public String getPresignedUrl(String fileName, String fileType) {
         return s3Service.generatePresignedUploadUrl(fileName, fileType);
     }
 
+    @Transactional(readOnly = true)
     public List<AllProductResDto> getAllProducts(AllProductsReqWithFiltersDto req) {
         int page = (req.getPageNumber() != null && req.getPageNumber() >= 0) ? req.getPageNumber() : 0;
         int size = (req.getProductsPerPage() != null && req.getProductsPerPage() > 0) ? req.getProductsPerPage() : 12;

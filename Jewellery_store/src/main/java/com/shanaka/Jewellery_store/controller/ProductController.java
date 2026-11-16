@@ -47,8 +47,7 @@ public class ProductController {
 
     @PostMapping("/products")
     public ResponseEntity<List<AllProductResDto>> getAllProducts(@RequestBody AllProductsReqWithFiltersDto allProductsReqWithFilters){
-
-return new ResponseEntity<>(productService.getAllProducts(allProductsReqWithFilters),HttpStatus.OK);
+        return new ResponseEntity<>(productService.getAllProducts(allProductsReqWithFilters),HttpStatus.OK);
     }
 
 
