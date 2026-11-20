@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class OrderItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,13 +26,12 @@ public class OrderItem {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(nullable = false, length = 50)
-    private String selectedColor;
+    @Column(name = "variant_color", nullable = false, length = 50)
+    private String variantColor;
 
-    @Column(nullable = false)
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(name = "unit_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice; // Price locked at the time of purchase
 }

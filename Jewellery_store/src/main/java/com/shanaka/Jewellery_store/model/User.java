@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users", indexes = {
@@ -22,9 +24,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String userName;
-
     @Column(nullable = false, unique = true, length = 150)
     private String email;
 
@@ -35,17 +34,25 @@ public class User {
     @Column(nullable = false, length = 30)
     private Role role;
 
-    @Column(length = 20)
-    private String contact; // Optional for users, null for admins
-
-    @Column(columnDefinition = "TEXT")
-    private String address; // Optional for users, null for admins
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DeliveryInfo> deliveryInfos = new ArrayList<>();
 
     @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    public void addDeliveryInfo(DeliveryInfo deliveryInfo) {
+        deliveryInfos.add(deliveryInfo);
+        deliveryInfo.setUser(this);
+    }
+
+    public void removeDeliveryInfo(DeliveryInfo deliveryInfo) {
+        deliveryInfos.remove(deliveryInfo);
+        deliveryInfo.setUser(null);
+    }
 }
